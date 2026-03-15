@@ -94,21 +94,21 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .slbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted);padding:12px 16px 5px;}
 
 /* HOME - HERO */
-.hero{margin:8px 13px;background:linear-gradient(145deg,#2d5a27,#1e3d1a);border-radius:22px;padding:20px 18px 18px;box-shadow:0 8px 28px rgba(45,90,39,0.28);position:relative;overflow:hidden;}
+.hero{margin:8px 13px;background:linear-gradient(145deg,#2d5a27,#1e3d1a);border-radius:22px;padding:22px 20px 18px;box-shadow:0 8px 28px rgba(45,90,39,0.28);position:relative;}
 .hero::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(200,240,101,.18) 0%,transparent 70%);pointer-events:none;}
-.hero-top{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
 .hero-left{flex:1;min-width:0;}
-.hero-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(200,240,101,.15);border:1px solid rgba(200,240,101,.3);border-radius:100px;padding:3px 10px;font-size:9px;letter-spacing:1.5px;font-weight:700;color:var(--lime);text-transform:uppercase;margin-bottom:6px;}
-.hero-wt{font-family:'Playfair Display',serif;font-size:52px;line-height:1;color:#fff;font-weight:700;white-space:nowrap;}
-.hero-u{font-size:16px;font-family:'Inter',sans-serif;font-weight:400;opacity:.55;margin-left:2px;}
-.hero-dt{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;}
-.dpill{display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+.hero-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(200,240,101,.15);border:1px solid rgba(200,240,101,.3);border-radius:100px;padding:3px 10px;font-size:9px;letter-spacing:1.5px;font-weight:700;color:var(--lime);text-transform:uppercase;margin-bottom:8px;}
+.hero-wt{font-family:'Playfair Display',serif;font-size:56px;line-height:1;color:#fff;font-weight:700;}
+.hero-u{font-size:18px;font-family:'Inter',sans-serif;font-weight:400;opacity:.5;margin-left:3px;vertical-align:baseline;}
+.hero-dt{font-size:12px;color:rgba(255,255,255,.45);margin-top:5px;}
+.dpill{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:5px 12px;border-radius:100px;font-size:11px;font-weight:700;}
 .dpill.dn{background:rgba(107,255,184,.14);color:#6bffb8;border:1px solid rgba(107,255,184,.25);}
 .dpill.up{background:rgba(255,107,107,.14);color:#ff9494;border:1px solid rgba(255,107,107,.25);}
 .dpill.eq{background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.15);}
-.hero-spark{width:90px;height:56px;flex-shrink:0;}
-.gbar{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);}
-.gbar-row{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.45);margin-bottom:5px;}
+.hero-spark{width:80px;height:60px;flex-shrink:0;margin-top:4px;}
+.gbar{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.1);}
+.gbar-row{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.45);margin-bottom:6px;}
 .gbar-pct{color:var(--lime);font-weight:700;}
 .gt{height:6px;background:rgba(255,255,255,.12);border-radius:100px;overflow:hidden;}
 .gf{height:100%;background:linear-gradient(90deg,#6bffb8,var(--lime));border-radius:100px;transition:width 1s cubic-bezier(.34,1.56,.64,1);}
@@ -132,7 +132,17 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .hchart-leg{display:flex;gap:10px;}
 .leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted);}
 .leg-dot{width:7px;height:7px;border-radius:50%;}
-.hchart-w{position:relative;height:130px;}
+.hchart-w{position:relative;height:150px;}
+/* chart period toggle */
+.ctog{display:flex;gap:4px;background:var(--bg2);border-radius:10px;padding:3px;}
+.ctog-btn{flex:1;padding:5px 8px;border-radius:7px;border:none;background:transparent;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .18s;-webkit-tap-highlight-color:transparent;white-space:nowrap;}
+.ctog-btn.on{background:var(--surface);color:var(--green);box-shadow:0 1px 4px rgba(0,0,0,.1);}
+/* chart summary pill */
+.chart-summary{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;}
+.csumm{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;}
+.csumm.dn{background:var(--success-lt);color:var(--success);}
+.csumm.up{background:var(--red-lt);color:var(--red);}
+.csumm.eq{background:var(--bg2);color:var(--muted);}
 
 /* CALLOUT */
 .co{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:14px;margin:5px 13px;}
@@ -351,13 +361,16 @@ input:checked+.tgsl::before{transform:translateX(19px);}
     </div>
     <div class="hchart">
       <div class="hchart-hd">
-        <div class="hchart-title">30-Day Trend</div>
-        <div class="hchart-leg">
-          <div class="leg"><div class="leg-dot" style="background:#2d5a27"></div>Weight</div>
-          <div class="leg"><div class="leg-dot" style="background:#c8f065;opacity:.7"></div>Trend</div>
+        <div class="hchart-title" id="hchart-title">Monthly Trend</div>
+        <div class="ctog">
+          <button class="ctog-btn" onclick="setChartPeriod('7')" id="cp-7">7D</button>
+          <button class="ctog-btn" onclick="setChartPeriod('30')" id="cp-30">30D</button>
+          <button class="ctog-btn on" onclick="setChartPeriod('90')" id="cp-90">3M</button>
+          <button class="ctog-btn" onclick="setChartPeriod('all')" id="cp-all">All</button>
         </div>
       </div>
       <div class="hchart-w"><canvas id="hcc"></canvas></div>
+      <div class="chart-summary" id="chart-summary"></div>
     </div>
     <div id="h-co"></div>
     <div class="srow">
@@ -548,7 +561,7 @@ input:checked+.tgsl::before{transform:translateX(19px);}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 var ST={entries:[],cfg:{name:'',sw:null,gw:null,ht:null,unit:'kg',ghToken:'',ghGistId:'',lock:false,pin:''}};
-var hCI=null,iCI=null,cu='kg',pb='';
+var hCI=null,iCI=null,cu='kg',pb='',chartPeriod='90';
 
 var GIST_FILENAME = 'weightwise-data.json';
 
@@ -816,6 +829,7 @@ function renderHome(){
     document.getElementById('h-ss-sub').textContent='Log daily to build your streak';
     document.getElementById('h-co').innerHTML='<div class="co b"><div class="co-ico">👋</div><div><div class="co-t">Welcome, '+(c.name||'there')+'!</div><div class="co-p">Tap the + Log tab to record your first weight. Daily logging unlocks all insights.</div></div></div>';
     document.getElementById('h-bmi').innerHTML='';
+    document.getElementById('chart-summary').innerHTML='';
     sparkDraw([]);drawHomeChart([]);return;
   }
   var lat=E[0];
@@ -869,9 +883,13 @@ function calcStk(){
   return{cur:cur,best:Math.max(best,dates.length?1:0)};
 }
 function sparkDraw(entries){
-  var cv=document.getElementById('h-spark'),ctx=cv.getContext('2d'),dpr=window.devicePixelRatio||1;
-  cv.width=cv.offsetWidth*dpr;cv.height=cv.offsetHeight*dpr;ctx.scale(dpr,dpr);
-  var W=cv.offsetWidth,H=cv.offsetHeight;ctx.clearRect(0,0,W,H);
+  var cv=document.getElementById('h-spark');
+  var dpr=window.devicePixelRatio||1;
+  var W=cv.offsetWidth||80, H=cv.offsetHeight||60;
+  cv.width=W*dpr; cv.height=H*dpr;
+  var ctx=cv.getContext('2d');
+  ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,W,H);
   var R=entries.slice(0,14).reverse();if(R.length<2)return;
   var vs=R.map(function(e){return e.weight;}),mn=Math.min.apply(null,vs),mx=Math.max.apply(null,vs),rng=mx-mn||0.5;
   var pts=vs.map(function(v,i){return{x:(i/(vs.length-1))*(W-4)+2,y:H-4-((v-mn)/rng)*(H-8)};});
@@ -882,22 +900,157 @@ function sparkDraw(entries){
   ctx.beginPath();pts.forEach(function(p,i){if(i===0)ctx.moveTo(p.x,p.y);else{var c=pts[i-1];ctx.bezierCurveTo(c.x+(p.x-c.x)*.5,c.y,p.x-(p.x-c.x)*.5,p.y,p.x,p.y);}});
   ctx.strokeStyle='rgba(200,240,101,.9)';ctx.lineWidth=2;ctx.stroke();
 }
+function setChartPeriod(p){
+  chartPeriod=p;
+  // update toggle buttons
+  ['7','30','90','all'].forEach(function(x){
+    var b=document.getElementById('cp-'+x);
+    if(b) b.classList.toggle('on', x===p);
+  });
+  drawHomeChart(ST.entries);
+}
+
 function drawHomeChart(entries){
-  var cv=document.getElementById('hcc');if(hCI){hCI.destroy();hCI=null;}
-  var u=ST.cfg.unit||'kg',cut=new Date();cut.setDate(cut.getDate()-30);
-  var sub=entries.filter(function(e){return new Date(e.date)>=cut;}).slice().reverse();
-  if(sub.length<2)return;
-  var lbs=sub.map(function(e){var d=new Date(e.date+'T00:00:00');return d.toLocaleDateString('en-AU',{day:'numeric',month:'short'});});
-  var dat=sub.map(function(e){return parseFloat(frKg(e.weight,u).toFixed(2));});
-  var n=dat.length,sx=0,sy=0,sxy=0,sxx=0;dat.forEach(function(y,x){sx+=x;sy+=y;sxy+=x*y;sxx+=x*x;});
-  var sl=(n*sxy-sx*sy)/(n*sxx-sx*sx)||0,ic=(sy-sl*sx)/n;
-  var tr=dat.map(function(_,x){return parseFloat((sl*x+ic).toFixed(2));});
-  hCI=new Chart(cv,{type:'line',data:{labels:lbs,datasets:[
-    {label:'Weight',data:dat,borderColor:'#2d5a27',backgroundColor:'rgba(45,90,39,.07)',borderWidth:2,pointBackgroundColor:'#2d5a27',pointRadius:dat.length>20?2:4,pointHoverRadius:6,tension:.4,fill:true},
-    {label:'Trend',data:tr,borderColor:'rgba(200,240,101,.75)',borderWidth:2,borderDash:[5,4],pointRadius:0,tension:0,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},
-  plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(255,255,255,.97)',titleColor:'#9a9590',bodyColor:'#1a1a1a',borderColor:'rgba(0,0,0,.1)',borderWidth:1,padding:9,callbacks:{label:function(c){return c.dataset.label+': '+c.parsed.y+u;}}}},
-  scales:{x:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{color:'#9a9590',font:{size:9},maxTicksLimit:6}},y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},ticks:{color:'#9a9590',font:{size:9},callback:function(v){return v+u;}}}}}});
+  var cv=document.getElementById('hcc');
+  if(hCI){hCI.destroy();hCI=null;}
+  var u=ST.cfg.unit||'kg';
+
+  // --- Filter by period ---
+  var now=new Date();
+  var cutDays={'7':7,'30':30,'90':90}[chartPeriod];
+  var sub;
+  if(cutDays){
+    var cut=new Date(); cut.setDate(now.getDate()-cutDays);
+    sub=entries.filter(function(e){return new Date(e.date+'T00:00:00')>=cut;});
+  } else {
+    sub=entries.slice();
+  }
+  sub=sub.slice().reverse(); // oldest first
+
+  // Update title
+  var titles={'7':'Last 7 Days','30':'Last 30 Days','90':'Last 3 Months','all':'All Time'};
+  document.getElementById('hchart-title').textContent=titles[chartPeriod]||'Trend';
+
+  // --- Aggregate for weekly/monthly views to reduce clutter ---
+  var labels=[], data=[];
+
+  if(chartPeriod==='7'){
+    // Daily — show every point, fill missing days with null
+    for(var i=6;i>=0;i--){
+      var d=new Date(); d.setDate(now.getDate()-i);
+      var ds=d.toISOString().split('T')[0];
+      var lbl=d.toLocaleDateString('en-AU',{weekday:'short',day:'numeric'});
+      var entry=sub.find(function(e){return e.date===ds;});
+      labels.push(lbl);
+      data.push(entry?parseFloat(frKg(entry.weight,u).toFixed(2)):null);
+    }
+  } else if(chartPeriod==='30'){
+    // Daily points for last 30 days
+    sub.forEach(function(e){
+      var d=new Date(e.date+'T00:00:00');
+      labels.push(d.toLocaleDateString('en-AU',{day:'numeric',month:'short'}));
+      data.push(parseFloat(frKg(e.weight,u).toFixed(2)));
+    });
+  } else if(chartPeriod==='90'){
+    // Weekly averages — group by ISO week
+    var wkMap={};
+    sub.forEach(function(e){
+      var d=new Date(e.date+'T00:00:00');
+      // Get Monday of this week
+      var day=d.getDay(), diff=d.getDate()-(day===0?6:day-1);
+      var mon=new Date(d); mon.setDate(diff);
+      var wk=mon.toISOString().split('T')[0];
+      if(!wkMap[wk]) wkMap[wk]=[];
+      wkMap[wk].push(e.weight);
+    });
+    Object.keys(wkMap).sort().forEach(function(wk){
+      var vs=wkMap[wk], avg=vs.reduce(function(a,b){return a+b;},0)/vs.length;
+      var d=new Date(wk+'T00:00:00');
+      labels.push(d.toLocaleDateString('en-AU',{day:'numeric',month:'short'}));
+      data.push(parseFloat(frKg(avg,u).toFixed(2)));
+    });
+  } else {
+    // All time — monthly averages
+    var mMap={};
+    sub.forEach(function(e){
+      var k=e.date.substring(0,7);
+      if(!mMap[k]) mMap[k]=[];
+      mMap[k].push(e.weight);
+    });
+    Object.keys(mMap).sort().forEach(function(k){
+      var vs=mMap[k], avg=vs.reduce(function(a,b){return a+b;},0)/vs.length;
+      var d=new Date(k+'-01');
+      labels.push(d.toLocaleDateString('en-AU',{month:'short',year:'2-digit'}));
+      data.push(parseFloat(frKg(avg,u).toFixed(2)));
+    });
+  }
+
+  // Filter out leading nulls for trend calc
+  var validData=data.filter(function(v){return v!==null;});
+  if(validData.length<2){
+    // Show empty state message
+    document.getElementById('chart-summary').innerHTML='<div style="font-size:12px;color:var(--muted);padding:4px 0;">Not enough data for this period — log more entries.</div>';
+    return;
+  }
+
+  // --- Linear regression on valid points only ---
+  var trendPts=[], xi=0;
+  data.forEach(function(v){ if(v!==null){trendPts.push({x:xi,y:v});} xi++; });
+  var n2=trendPts.length,sx=0,sy=0,sxy=0,sxx=0;
+  trendPts.forEach(function(p){sx+=p.x;sy+=p.y;sxy+=p.x*p.y;sxx+=p.x*p.x;});
+  var sl=(n2*sxy-sx*sy)/(n2*sxx-sx*sx)||0, ic=(sy-sl*sx)/n2;
+  // Build full trend line (interpolate nulls)
+  var trend=data.map(function(_,x){return parseFloat((sl*x+ic).toFixed(2));});
+
+  // --- Summary pill ---
+  var first=validData[0], last=validData[validData.length-1];
+  var diff=last-first, diffDisp=Math.abs(diff).toFixed(1);
+  var summCls=diff<-0.09?'dn':diff>0.09?'up':'eq';
+  var summArrow=diff<-0.09?'↓':diff>0.09?'↑':'→';
+  var summLabel={'7':'this week','30':'this month','90':'last 3 months','all':'all time'}[chartPeriod];
+  var pctChg=first?((diff/first)*100).toFixed(1):0;
+  document.getElementById('chart-summary').innerHTML=
+    '<div class="csumm '+summCls+'">'+summArrow+' '+diffDisp+u+' '+summLabel+'</div>'+
+    '<div class="csumm '+summCls+'">'+pctChg+'%</div>'+
+    (sl<0?'<div class="csumm dn">📉 Downward trend</div>':sl>0.001?'<div class="csumm up">📈 Upward trend</div>':'<div class="csumm eq">→ Stable</div>');
+
+  var ptRadius=data.length>25?0:data.length>12?3:5;
+
+  hCI=new Chart(cv,{
+    type:'line',
+    data:{labels:labels,datasets:[
+      {label:'Weight',data:data,borderColor:'#2d5a27',backgroundColor:'rgba(45,90,39,.07)',
+       borderWidth:2.5,pointBackgroundColor:'#2d5a27',pointRadius:ptRadius,
+       pointHoverRadius:6,tension:.4,fill:true,spanGaps:false},
+      {label:'Trend',data:trend,borderColor:'rgba(200,240,101,.8)',borderWidth:2,
+       borderDash:[5,4],pointRadius:0,tension:0,fill:false,spanGaps:true}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{intersect:false,mode:'index'},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'rgba(255,255,255,.97)',titleColor:'#9a9590',
+          bodyColor:'#1a1a1a',borderColor:'rgba(0,0,0,.1)',borderWidth:1,padding:10,
+          callbacks:{
+            label:function(c){
+              if(c.parsed.y===null) return null;
+              var lbl=c.dataset.label;
+              var suffix=chartPeriod==='90'?' (week avg)':chartPeriod==='all'?' (month avg)':'';
+              return lbl+suffix+': '+c.parsed.y+u;
+            }
+          }
+        }
+      },
+      scales:{
+        x:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},
+           ticks:{color:'#9a9590',font:{size:9},maxTicksLimit:chartPeriod==='7'?7:6}},
+        y:{grid:{color:'rgba(0,0,0,.04)',drawBorder:false},
+           ticks:{color:'#9a9590',font:{size:9},callback:function(v){return v+u;}}}
+      }
+    }
+  });
 }
 
 /* INSIGHTS */
