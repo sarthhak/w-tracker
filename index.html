@@ -94,18 +94,19 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Inter'
 .slbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--muted);padding:12px 16px 5px;}
 
 /* HOME - HERO */
-.hero{margin:8px 13px;background:linear-gradient(145deg,#2d5a27,#1e3d1a);border-radius:22px;padding:20px 18px 16px;box-shadow:0 8px 28px rgba(45,90,39,0.28);position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(200,240,101,.18) 0%,transparent 70%);}
-.hero-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.hero{margin:8px 13px;background:linear-gradient(145deg,#2d5a27,#1e3d1a);border-radius:22px;padding:20px 18px 18px;box-shadow:0 8px 28px rgba(45,90,39,0.28);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50px;right:-50px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(200,240,101,.18) 0%,transparent 70%);pointer-events:none;}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.hero-left{flex:1;min-width:0;}
 .hero-chip{display:inline-flex;align-items:center;gap:4px;background:rgba(200,240,101,.15);border:1px solid rgba(200,240,101,.3);border-radius:100px;padding:3px 10px;font-size:9px;letter-spacing:1.5px;font-weight:700;color:var(--lime);text-transform:uppercase;margin-bottom:6px;}
-.hero-wt{font-family:'Playfair Display',serif;font-size:62px;line-height:1;color:#fff;font-weight:700;}
-.hero-u{font-size:18px;font-family:'Inter',sans-serif;font-weight:400;opacity:.55;margin-left:2px;}
-.hero-dt{font-size:12px;color:rgba(255,255,255,.45);margin-top:3px;}
-.dpill{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
+.hero-wt{font-family:'Playfair Display',serif;font-size:52px;line-height:1;color:#fff;font-weight:700;white-space:nowrap;}
+.hero-u{font-size:16px;font-family:'Inter',sans-serif;font-weight:400;opacity:.55;margin-left:2px;}
+.hero-dt{font-size:11px;color:rgba(255,255,255,.45);margin-top:3px;}
+.dpill{display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700;}
 .dpill.dn{background:rgba(107,255,184,.14);color:#6bffb8;border:1px solid rgba(107,255,184,.25);}
 .dpill.up{background:rgba(255,107,107,.14);color:#ff9494;border:1px solid rgba(255,107,107,.25);}
 .dpill.eq{background:rgba(255,255,255,.1);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.15);}
-.hero-spark{width:100px;height:52px;flex-shrink:0;}
+.hero-spark{width:90px;height:56px;flex-shrink:0;}
 .gbar{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);}
 .gbar-row{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.45);margin-bottom:5px;}
 .gbar-pct{color:var(--lime);font-weight:700;}
@@ -329,7 +330,7 @@ input:checked+.tgsl::before{transform:translateX(19px);}
     </div>
     <div class="hero" id="h-hero">
       <div class="hero-top">
-        <div>
+        <div class="hero-left">
           <div class="hero-chip">⚖ Current Weight</div>
           <div class="hero-wt" id="h-wt">—<span class="hero-u" id="h-u">kg</span></div>
           <div class="hero-dt" id="h-dt">No entries yet</div>
@@ -479,30 +480,35 @@ input:checked+.tgsl::before{transform:translateX(19px);}
         <button class="sbtn s" onclick="savePin()">Save PIN</button>
       </div>
     </div>
-    <div class="slbl">GOOGLE SHEETS DATABASE</div>
+    <div class="slbl">GITHUB DATABASE SYNC</div>
     <div style="padding:0 13px;">
       <div class="card" style="margin:0 0 7px;">
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:10px;">Connect your own Google Sheet so entries sync across all devices. Takes ~5 minutes.</div>
-        <label class="ilbl">Apps Script Web App URL</label>
-        <input class="surlinp" type="url" id="s-url" placeholder="https://script.google.com/macros/s/.../exec">
-        <button class="sbtn s" style="margin-top:9px;" onclick="testConn()">🔗 Test Connection</button>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px;">
+          Sync your data across all devices using a <strong>private GitHub Gist</strong> as your database. Free, no servers, 100% yours. Takes 2 minutes to set up.
+        </div>
+        <label class="ilbl">GitHub Personal Access Token</label>
+        <input class="surlinp" type="password" id="s-gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+        <label class="ilbl" style="margin-top:10px;">Gist ID <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;">(auto-filled after first save)</span></label>
+        <input class="surlinp" type="text" id="s-gh-gist" placeholder="Will be created automatically">
+        <div style="display:flex;gap:7px;margin-top:9px;">
+          <button class="sbtn s" style="flex:1;margin:0;" onclick="ghTest()">🔗 Test &amp; Connect</button>
+          <button class="sbtn s" style="flex:1;margin:0;" onclick="ghSync()">↓ Sync Now</button>
+        </div>
+        <div id="gh-status" style="font-size:12px;margin-top:8px;color:var(--muted);min-height:16px;"></div>
       </div>
       <div class="card" style="margin:0 0 7px;">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--muted);margin-bottom:10px;">Setup Steps</div>
-        <div class="step"><div class="stepn">1</div><span>Go to <strong>sheets.google.com</strong> → new spreadsheet → name it <em>WeightWise Data</em></span></div>
-        <div class="step"><div class="stepn">2</div><span>Rename the first sheet tab to <strong>Weights</strong>. Add Row 1 headers: <strong>Date | Weight (kg) | Note</strong></span></div>
-        <div class="step"><div class="stepn">3</div><span>Click <strong>Extensions → Apps Script</strong> → delete existing code → paste the code (copy button below)</span></div>
-        <div class="step"><div class="stepn">4</div><span>Click <strong>Deploy → New Deployment → Web App</strong> → Execute as: <em>Me</em> → Who has access: <strong>Anyone</strong> → Deploy</span></div>
-        <div class="step"><div class="stepn">5</div><span>Authorise with Google → copy the <strong>Web App URL</strong> → paste in the field above → Test Connection</span></div>
-        <button class="sbtn p" style="margin-top:12px;" onclick="copyScript()">📋 Copy Apps Script Code</button>
-        <button class="sbtn s" style="margin-top:6px;" id="scr-tog-btn" onclick="togScript()">👁 Show Code Preview</button>
-        <div class="script-box" id="scr-box" style="display:none;"></div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--muted);margin-bottom:10px;">Setup — 2 minutes</div>
+        <div class="step"><div class="stepn">1</div><span>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong></span></div>
+        <div class="step"><div class="stepn">2</div><span>Click <strong>Generate new token (classic)</strong> → give it a name like <em>WeightWise</em></span></div>
+        <div class="step"><div class="stepn">3</div><span>Under <strong>Scopes</strong>, tick only <strong>gist</strong> → click <strong>Generate token</strong></span></div>
+        <div class="step"><div class="stepn">4</div><span>Copy the token (starts with <code>ghp_</code>) → paste above → tap <strong>Test &amp; Connect</strong></span></div>
+        <div class="step"><div class="stepn">5</div><span>A private Gist is created automatically. Your Gist ID is saved. From now on every log syncs instantly.</span></div>
       </div>
     </div>
     <div class="slbl">DATA</div>
     <div style="padding:0 13px;">
       <button class="sbtn p" onclick="saveSettings()">Save All Settings</button>
-      <button class="sbtn s" style="margin-top:7px;" onclick="syncSheet()">↓ Sync from Google Sheets</button>
+      <button class="sbtn s" style="margin-top:7px;" onclick="ghSync()">↓ Sync from GitHub Gist</button>
       <button class="sbtn s" style="margin-top:7px;" onclick="expCSV()">↓ Export CSV</button>
       <button class="sbtn d" style="margin-top:7px;" onclick="resetApp()">⚠ Reset All Data</button>
     </div>
@@ -541,43 +547,112 @@ input:checked+.tgsl::before{transform:translateX(19px);}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-var ST={entries:[],cfg:{name:'',sw:null,gw:null,ht:null,unit:'kg',url:'',lock:false,pin:''}};
+var ST={entries:[],cfg:{name:'',sw:null,gw:null,ht:null,unit:'kg',ghToken:'',ghGistId:'',lock:false,pin:''}};
 var hCI=null,iCI=null,cu='kg',pb='';
 
-var SCRIPT=`function doGet(e){
-  var a=e.parameter.action;
-  if(a==='ping') return j({status:'ok'});
-  if(a==='get'){
-    var sh=SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Weights');
-    if(!sh) return j({entries:[]});
-    var d=sh.getDataRange().getValues(),out=[];
-    for(var i=1;i<d.length;i++){
-      if(d[i][0]) out.push({
-        date:Utilities.formatDate(new Date(d[i][0]),Session.getScriptTimeZone(),'yyyy-MM-dd'),
-        weight:parseFloat(d[i][1])||0,
-        note:d[i][2]||''
-      });
-    }
-    return j({entries:out});
-  }
-  return j({status:'ok'});
+var GIST_FILENAME = 'weightwise-data.json';
+
+/* ── GITHUB GIST API ── */
+function ghHeaders() {
+  var t = ST.cfg.ghToken;
+  return { 'Authorization': 'token ' + t, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' };
 }
-function doPost(e){
-  var b=JSON.parse(e.postData.contents);
-  if(b.action==='log'){
-    var ss=SpreadsheetApp.getActiveSpreadsheet();
-    var sh=ss.getSheetByName('Weights');
-    if(!sh){sh=ss.insertSheet('Weights');sh.appendRow(['Date','Weight (kg)','Note']);sh.getRange(1,1,1,3).setFontWeight('bold');}
-    var d=sh.getDataRange().getValues();
-    for(var i=1;i<d.length;i++){
-      var rd=Utilities.formatDate(new Date(d[i][0]),Session.getScriptTimeZone(),'yyyy-MM-dd');
-      if(rd===b.date){sh.getRange(i+1,2).setValue(b.weight);sh.getRange(i+1,3).setValue(b.note||'');return j({status:'updated'});}
-    }
-    sh.appendRow([b.date,b.weight,b.note||'']);
-  }
-  return j({status:'ok'});
+
+function ghTest() {
+  var token = document.getElementById('s-gh-token').value.trim();
+  if (!token) { toast('Paste your GitHub token first', 'er'); return; }
+  ST.cfg.ghToken = token;
+  ghStatus('Testing connection...', '');
+  fetch('https://api.github.com/user', { headers: ghHeaders() })
+    .then(function(r) { return r.json(); })
+    .then(function(u) {
+      if (u.login) {
+        ghStatus('✓ Connected as @' + u.login + ' — creating Gist...', 'ok');
+        ghEnsureGist();
+      } else {
+        ghStatus('✗ Invalid token — check and try again', 'er');
+      }
+    })
+    .catch(function() { ghStatus('✗ Connection failed — check token', 'er'); });
 }
-function j(o){return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);}`;
+
+function ghEnsureGist() {
+  var gistId = ST.cfg.ghGistId || document.getElementById('s-gh-gist').value.trim();
+  if (gistId) { ST.cfg.ghGistId = gistId; ghPushAll(); return; }
+  // Create new private gist
+  var payload = {
+    description: 'WeightWise Data — do not edit manually',
+    public: false,
+    files: {}
+  };
+  payload.files[GIST_FILENAME] = { content: JSON.stringify({ entries: ST.entries, version: 1 }) };
+  fetch('https://api.github.com/gists', {
+    method: 'POST', headers: ghHeaders(), body: JSON.stringify(payload)
+  })
+    .then(function(r) { return r.json(); })
+    .then(function(g) {
+      if (g.id) {
+        ST.cfg.ghGistId = g.id;
+        document.getElementById('s-gh-gist').value = g.id;
+        save();
+        ghStatus('✓ Gist created! ID: ' + g.id + '. All future logs auto-sync.', 'ok');
+        toast('GitHub connected! ✓', 'ok');
+      } else {
+        ghStatus('✗ Could not create Gist — check token scope (needs "gist")', 'er');
+      }
+    })
+    .catch(function() { ghStatus('✗ Failed to create Gist', 'er'); });
+}
+
+function ghPushAll() {
+  if (!ST.cfg.ghToken || !ST.cfg.ghGistId) return;
+  var payload = { files: {} };
+  payload.files[GIST_FILENAME] = { content: JSON.stringify({ entries: ST.entries, version: 1, updated: new Date().toISOString() }) };
+  fetch('https://api.github.com/gists/' + ST.cfg.ghGistId, {
+    method: 'PATCH', headers: ghHeaders(), body: JSON.stringify(payload)
+  })
+    .then(function(r) { if (r.ok) ghStatus('✓ Synced to GitHub ' + new Date().toLocaleTimeString(), 'ok'); })
+    .catch(function() {});
+}
+
+function ghSync() {
+  var token = document.getElementById('s-gh-token') ? document.getElementById('s-gh-token').value.trim() : ST.cfg.ghToken;
+  if (token) ST.cfg.ghToken = token;
+  var gistId = document.getElementById('s-gh-gist') ? document.getElementById('s-gh-gist').value.trim() : ST.cfg.ghGistId;
+  if (gistId) ST.cfg.ghGistId = gistId;
+  if (!ST.cfg.ghToken || !ST.cfg.ghGistId) { toast('Set up GitHub in Settings first', 'er'); return; }
+  toast('Syncing...', '');
+  fetch('https://api.github.com/gists/' + ST.cfg.ghGistId, { headers: ghHeaders() })
+    .then(function(r) { return r.json(); })
+    .then(function(g) {
+      var file = g.files && g.files[GIST_FILENAME];
+      if (!file) { toast('No data found in Gist', 'er'); return; }
+      var raw = file.content;
+      var data = JSON.parse(raw);
+      if (data && data.entries) {
+        var added = 0;
+        data.entries.forEach(function(e) {
+          if (!ST.entries.find(function(x) { return x.date === e.date; })) { ST.entries.push(e); added++; }
+          else {
+            // Update existing with remote value
+            var idx = ST.entries.findIndex(function(x) { return x.date === e.date; });
+            ST.entries[idx] = e;
+          }
+        });
+        ST.entries.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+        save(); renderAll();
+        toast('Synced ' + data.entries.length + ' entries ✓', 'ok');
+      }
+    })
+    .catch(function() { toast('Sync failed — check connection', 'er'); });
+}
+
+function ghStatus(msg, type) {
+  var el = document.getElementById('gh-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = type === 'ok' ? 'var(--success)' : type === 'er' ? 'var(--red)' : 'var(--muted)';
+}
 
 function load(){
   try{var s=localStorage.getItem('ww3s'),e=localStorage.getItem('ww3e');
@@ -596,7 +671,7 @@ function du(v){return dn(v)+' '+(ST.cfg.unit||'kg');}
 function init(){
   load();
   document.getElementById('lg-dt').value=td();
-  document.getElementById('scr-box').textContent=SCRIPT;
+  // GitHub Gist DB ready
   var c=ST.cfg;
   if(c.lock&&c.pin){
     document.getElementById('lock').classList.remove('off');
@@ -690,7 +765,7 @@ function logW(){
   ST.entries.push({date:dt,weight:kg,note:nt});
   ST.entries.sort(function(a,b){return new Date(b.date)-new Date(a.date);});
   save();
-  if(ST.cfg.url)pushSheet({date:dt,weight:kg,note:nt});
+  if(ST.cfg.ghToken&&ST.cfg.ghGistId)ghPushAll();
   document.getElementById('wt-v').value='';
   document.getElementById('lg-nt').value='';
   document.getElementById('lg-dt').value=td();
@@ -896,7 +971,8 @@ function loadSettings(){
   document.getElementById('ss').value=c.sw?frKg(c.sw,u).toFixed(1):'';
   document.getElementById('sg').value=c.gw?frKg(c.gw,u).toFixed(1):'';
   document.getElementById('sh').value=c.ht||'';
-  document.getElementById('s-url').value=c.url||'';
+  document.getElementById('s-gh-token').value=c.ghToken||'';
+  document.getElementById('s-gh-gist').value=c.ghGistId||'';
   document.getElementById('s-lock').checked=c.lock||false;
   document.getElementById('pin-sec').style.display=c.lock?'block':'none';
   document.getElementById('ss-hint').textContent=c.sw?'Currently: '+frKg(c.sw,u).toFixed(1)+u:'';
@@ -907,33 +983,10 @@ function saveSettings(){
   var sr=parseFloat(document.getElementById('ss').value),gr=parseFloat(document.getElementById('sg').value);
   ST.cfg.sw=sr?toKg(sr,u):null;ST.cfg.gw=gr?toKg(gr,u):null;
   ST.cfg.ht=parseFloat(document.getElementById('sh').value)||null;
-  ST.cfg.url=document.getElementById('s-url').value.trim();
+  ST.cfg.ghToken=document.getElementById('s-gh-token').value.trim();
+  ST.cfg.ghGistId=document.getElementById('s-gh-gist').value.trim();
   ST.cfg.lock=document.getElementById('s-lock').checked;
   save();renderAll();toast('Settings saved ✓','ok');
-}
-
-/* SHEETS */
-function pushSheet(e){fetch(ST.cfg.url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'log',date:e.date,weight:e.weight,note:e.note})}).catch(function(){});}
-function syncSheet(){
-  if(!ST.cfg.url){toast('Add Sheets URL in Settings first','er');return;}
-  toast('Syncing...','');
-  fetch(ST.cfg.url+'?action=get').then(function(r){return r.json();}).then(function(d){
-    if(d&&d.entries){var a=0;d.entries.forEach(function(e){if(!ST.entries.find(function(x){return x.date===e.date;})){ST.entries.push(e);a++;}});
-    ST.entries.sort(function(a,b){return new Date(b.date)-new Date(a.date);});save();renderAll();toast('Synced '+a+' new entries','ok');}
-  }).catch(function(){toast('Sync failed — check URL','er');});
-}
-function testConn(){
-  var u=document.getElementById('s-url').value.trim();if(!u){toast('Enter URL first','er');return;}
-  toast('Testing...','');
-  fetch(u+'?action=ping').then(function(r){return r.json();}).then(function(d){toast(d.status==='ok'?'✓ Connected!':'Unexpected response','ok');}).catch(function(){toast('Connection failed','er');});
-}
-function copyScript(){
-  if(navigator.clipboard)navigator.clipboard.writeText(SCRIPT).then(function(){toast('📋 Code copied!','ok');});
-  else{var t=document.createElement('textarea');t.value=SCRIPT;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);toast('📋 Code copied!','ok');}
-}
-function togScript(){
-  var b=document.getElementById('scr-box'),bt=document.getElementById('scr-tog-btn'),v=b.style.display!=='none';
-  b.style.display=v?'none':'block';bt.textContent=v?'👁 Show Code Preview':'▲ Hide Preview';
 }
 
 /* EXPORT / RESET */
